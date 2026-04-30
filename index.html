@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nike - Just Do It</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Helvetica+Neue:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #111111;
+            --white: #ffffff;
+            --gray: #f5f5f5;
+            --dark-gray: #757575;
+            --light-gray: #e5e5e5;
+            --font-heading: 'Oswald', sans-serif;
+            --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--black);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        body.lock-scroll {
+            overflow: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--black);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-gray);
+        }
+
+        /* Navbar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--light-gray);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            height: 70px;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--black);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .icon-btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .icon-btn:hover {
+            background-color: var(--gray);
+        }
+
+        .icon-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background-color: var(--black);
+            color: var(--white);
+            font-size: 0.7rem;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .hamburger {
+            display: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: calc(100vh - 70px);
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 1rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 6rem;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .hero .btn {
+            background-color: var(--white);
+            color: var(--black);
+            font-size: 1.1rem;
+            padding: 14px 32px;
+        }
+
+        .hero .btn:hover {
+            background-color: var(--light-gray);
+        }
+
+        /* Products Section */
+        .section-title {
+            text-align: center;
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin: 4rem 0 2rem;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            padding: 0 1rem;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--light-gray);
+            border-radius: 30px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--black);
+            color: var(--white);
+            border-color: var(--black);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .product-img-container {
+            position: relative;
+            background-color: var(--gray);
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .product-img.secondary {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+
+        .product-card:hover .product-img.primary {
+            opacity: 0;
+        }
+
+        .product-card:hover .product-img.secondary {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .product-category {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart-btn {
+            margin-top: auto;
+            width: 100%;
+            border: 1px solid var(--light-gray);
+            background: transparent;
+            color: var(--black);
+        }
+
+        .add-to-cart-btn:hover {
+            border-color: var(--black);
+            background: var(--black);
+            color: var(--white);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            display: flex;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--white);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .modal-img-col {
+            flex: 1;
+            background-color: var(--gray);
+            min-height: 300px;
+        }
+
+        .modal-img-col img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-info-col {
+            flex: 1;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+        }
+
+        .modal-title {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+        }
+
+        .modal-price {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-desc {
+            color: var(--dark-gray);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        /* Cart Drawer */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1100;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px;
+            max-width: 100%;
+            height: 100%;
+            background-color: var(--white);
+            z-index: 1200;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        }
+
+        .cart-drawer.active {
+            transform: translateX(0);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .cart-header h2 {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            font-size: 1.5rem;
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            background-color: var(--gray);
+            object-fit: cover;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-item-title {
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-price {
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .qty-btn {
+            width: 24px;
+            height: 24px;
+            border: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+
+        .remove-btn {
+            color: var(--dark-gray);
+            text-decoration: underline;
+            font-size: 0.85rem;
+        }
+
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+            background-color: var(--gray);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+        }
+
+        .empty-cart-msg {
+            text-align: center;
+            color: var(--dark-gray);
+            margin-top: 2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-col ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-col a {
+            color: #999;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-col a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            border-top: 1px solid #333;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .modal-content {
+                flex-direction: column;
+                overflow-y: auto;
+            }
+            .modal-img-col {
+                height: 300px;
+                flex: none;
+            }
+            .modal-info-col {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 4rem;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                gap: 0;
+                border-bottom: 1px solid var(--light-gray);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: clip-path 0.3s ease-in-out;
+            }
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            .nav-links a {
+                display: block;
+                padding: 1.5rem 2rem;
+                border-top: 1px solid var(--light-gray);
+            }
+            .products-grid {
+                padding: 0 1rem 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="logo">NIKE</a>
+        
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#products-section" onclick="filterByNav('Men')">Men</a></li>
+            <li><a href="#products-section" onclick="filterByNav('Women')">Women</a></li>
+            <li><a href="#products-section" onclick="filterByNav('Kids')">Kids</a></li>
+            <li><a href="#products-section" onclick="filterByNav('Sale')">Sale</a></li>
+        </ul>
+
+        <div class="nav-icons">
+            <button class="icon-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+            <button class="icon-btn" onclick="toggleCart()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <span class="cart-badge" id="cart-badge">0</span>
+            </button>
+            <button class="icon-btn hamburger" onclick="toggleMenu()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Just Do It</h1>
+            <p>The new collection is here. Elevate your game with our latest releases.</p>
+            <a href="#products-section" class="btn">Shop Now</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="products-section">
+        <h2 class="section-title">Featured Products</h2>
+        
+        <div class="filters" id="filters">
+            <button class="filter-btn active" onclick="filterProducts('All', this)">All</button>
+            <button class="filter-btn" onclick="filterProducts('Shoes', this)">Shoes</button>
+            <button class="filter-btn" onclick="filterProducts('Clothing', this)">Clothing</button>
+            <button class="filter-btn" onclick="filterProducts('Accessories', this)">Accessories</button>
+        </div>
+
+        <div class="products-grid" id="products-grid">
+            <!-- Products injected by JS -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Find a Store</h3>
+                <ul>
+                    <li><a href="#">Become a Member</a></li>
+                    <li><a href="#">Sign Up for Email</a></li>
+                    <li><a href="#">Send Us Feedback</a></li>
+                    <li><a href="#">Student Discounts</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Get Help</h3>
+                <ul>
+                    <li><a href="#">Order Status</a></li>
+                    <li><a href="#">Delivery</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Payment Options</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>About Nike</h3>
+                <ul>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Investors</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Nike, Inc. All Rights Reserved</p>
+            <div style="display: flex; gap: 1rem;">
+                <a href="#">Guides</a>
+                <a href="#">Terms of Sale</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Nike Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Modal -->
+    <div class="modal-overlay" id="product-modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="modal-img-col">
+                <img id="modal-img" src="" alt="">
+            </div>
+            <div class="modal-info-col">
+                <h2 class="modal-title" id="modal-title"></h2>
+                <div class="modal-price" id="modal-price"></div>
+                <p class="modal-desc" id="modal-desc"></p>
+                <button class="btn" id="modal-add-btn">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="icon-btn" onclick="toggleCart()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items injected by JS -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            <button class="btn checkout-btn">Checkout</button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Product Data
+        const products =[
+            {
+                id: 1,
+                name: "Nike Air Force 1 '07",
+                price: 115,
+                category: "Shoes",
+                gender: "Men",
+                img1: "https://images.unsplash.com/photo-1595950653106-6c9ebd614c3a?auto=format&fit=crop&w=600&q=80",
+                img2: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=600&q=80",
+                desc: "The radiance lives on in the Nike Air Force 1 '07, the b-ball icon that puts a fresh spin on what you know best: crisp leather, bold colors and the perfect amount of flash to make you shine."
+            },
+            {
+                id: 2,
+                name: "Nike Air Max 270",
+                price: 160,
+                category: "Shoes",
+                gender: "Women",
+                img1: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?auto=format&fit=crop&w=600&q=80",
+                img2: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=600&q=80",
+                desc: "Nike's first lifestyle Air Max brings you style, comfort and big attitude in the Nike Air Max 270. The design draws inspiration from Air Max icons, showcasing Nike's greatest innovation."
+            },
+            {
+                id: 3,
+                name: "Sportswear Club Fleece",
+                price: 60,
+                category: "Clothing",
+                gender: "Men",
+                img1: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=600&q=80",
+                img2: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80",
+                desc: "A closet staple, the Nike Sportswear Club Fleece Pullover Hoodie combines classic style with the soft comfort of fleece."
+            },
+            {
+                id: 4,
+                name: "Nike Dunk Low Retro",
+                price: 110,
+                category: "Shoes",
+                gender: "Men",
+                img1: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?auto=format&fit=crop&w=600&q=80",
+                img2: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=600&q=80",
+                desc: "Created for the hardwood but taken to the streets, the '80s b-ball icon returns with perfectly shined overlays and classic team colors."
+            },
+            {
+                id: 5,
+                name: "Nike Pro Dri-FIT",
+                price: 35,
+                category: "Clothing",
+                gender: "Women",
+                img1: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?auto=format&fit=crop&w=600&q=80",
+                img2: "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?auto=format&fit=crop&w=600&q=80",
+                desc: "The Nike Pro Dri-FIT Top hugs you in lightweight fabric with breathability built into heat zones to keep you cool and dry."
+            },
+            {
+                id: 6,
+                name: "Nike ZoomX Invincible",
+                price: 180,
+                category: "Shoes",
+                gender: "Men",
+                img1: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80",
+                img2: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=600&q=80",
+                desc: "Push your runs to the limit. The Nike ZoomX Invincible Run Flyknit 2 keeps you going with the same super-soft feel."
+            },
+            {
+                id: 7,
+                name: "Everyday Cushion Crew",
+                price: 20,
+                category: "Accessories",
+                gender: "Kids",
+                img1: "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?auto=format&fit=crop&w=600&q=80",
+                img2: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=600&q=80",
+                desc: "Power through your workout with the Nike Everyday Cushioned Socks. The thick terry sole gives you extra comfort for footdrills and lifts."
+            },
+            {
+                id: 8,
+                name: "Nike Heritage Crossbody",
+                price: 25,
+                category: "Accessories",
+                gender: "Women",
+                img1: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80",
+                img2: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80",
+                desc: "An alternative to the classic hip pack, the Nike Heritage Crossbody bag offers hands-free storage in a design you wear across the chest."
+            }
+        ];
+
+        // State
+        let cart = JSON.parse(localStorage.getItem('nike_cart')) ||[];
+        let currentFilter = 'All';
+
+        // DOM Elements
+        const productsGrid = document.getElementById('products-grid');
+        const cartBadge = document.getElementById('cart-badge');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartTotalPrice = document.getElementById('cart-total-price');
+        const cartOverlay = document.getElementById('cart-overlay');
+        const cartDrawer = document.getElementById('cart-drawer');
+        const navLinks = document.getElementById('nav-links');
+        
+        // Modal Elements
+        const modalOverlay = document.getElementById('product-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalPrice = document.getElementById('modal-price');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalAddBtn = document.getElementById('modal-add-btn');
+
+        // Initialization
+        function init() {
+            renderProducts(products);
+            updateCartUI();
+        }
+
+        // Render Products
+        function renderProducts(productsToRender) {
+            productsGrid.innerHTML = '';
+            
+            if (productsToRender.length === 0) {
+                productsGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--dark-gray);">No products found.</p>';
+                return;
+            }
+
+            productsToRender.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.onclick = () => openModal(product.id);
+                
+                card.innerHTML = `
+                    <div class="product-img-container">
+                        <img src="${product.img1}" alt="${product.name}" class="product-img primary">
+                        <img src="${product.img2}" alt="${product.name}" class="product-img secondary">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-category">${product.gender}'s ${product.category}</p>
+                        <p class="product-price">$${product.price.toFixed(2)}</p>
+                        <button class="btn add-to-cart-btn" onclick="handleAddToCart(event, ${product.id})">Add to Cart</button>
+                    </div>
+                `;
+                productsGrid.appendChild(card);
+            });
+        }
+
+        // Filters
+        function filterProducts(category, btnElement) {
+            // Update active button
+            if (btnElement) {
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                btnElement.classList.add('active');
+            }
+
+            let filtered = products;
+            if (category !== 'All') {
+                filtered = products.filter(p => p.category === category);
+            }
+            renderProducts(filtered);
+        }
+
+        function filterByNav(filterValue) {
+            // Remove active state from standard filters
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            
+            let filtered = products;
+            if (filterValue !== 'Sale') {
+                filtered = products.filter(p => p.gender === filterValue);
+            } else {
+                // Mock sale filter (just return some products)
+                filtered = products.slice(0, 3);
+            }
+            
+            renderProducts(filtered);
+            if(window.innerWidth <= 768) toggleMenu(); // Close mobile menu
+        }
+
+        // Modal Logic
+        function openModal(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+
+            modalImg.src = product.img1;
+            modalTitle.textContent = product.name;
+            modalPrice.textContent = `$${product.price.toFixed(2)}`;
+            modalDesc.textContent = product.desc;
+            
+            modalAddBtn.onclick = () => {
+                addToCart(product.id);
+                closeModal();
+                toggleCart();
+            };
+
+            modalOverlay.classList.add('active');
+            document.body.classList.add('lock-scroll');
+        }
+
+        function closeModal(e) {
+            if (e && e.target !== modalOverlay && e.target.closest('.modal-close') === null) return;
+            modalOverlay.classList.remove('active');
+            document.body.classList.remove('lock-scroll');
+        }
+
+        // Cart Logic
+        function toggleCart() {
+            cartOverlay.classList.toggle('active');
+            cartDrawer.classList.toggle('active');
+            
+            if (cartDrawer.classList.contains('active')) {
+                document.body.classList.add('lock-scroll');
+            } else {
+                document.body.classList.remove('lock-scroll');
+            }
+        }
+
+        function handleAddToCart(event, id) {
+            event.stopPropagation(); // Prevent opening modal
+            addToCart(id);
+            toggleCart(); // Open drawer to show it was added
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existingItem = cart.find(item => item.id === id);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            saveCart();
+            updateCartUI();
+        }
+
+        function updateQuantity(id, change) {
+            const itemIndex = cart.findIndex(item => item.id === id);
+            if (itemIndex > -1) {
+                cart[itemIndex].quantity += change;
+                if (cart[itemIndex].quantity <= 0) {
+                    cart.splice(itemIndex, 1);
+                }
+                saveCart();
+                updateCartUI();
+            }
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            saveCart();
+            updateCartUI();
+        }
+
+        function saveCart() {
+            localStorage.setItem('nike_cart', JSON.stringify(cart));
+        }
+
+        function updateCartUI() {
+            // Update badge
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartBadge.textContent = totalItems;
+
+            // Render items
+            cartItemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<div class="empty-cart-msg">Your cart is empty.</div>';
+                cartTotalPrice.textContent = '$0.00';
+                return;
+            }
+
+            let total = 0;
+
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.img1}" alt="${item.name}" class="cart-item-img">
+                    <div class="cart-item-info">
+                        <h4 class="cart-item-title">${item.name}</h4>
+                        <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+                        <div class="cart-item-actions">
+                            <div class="qty-controls">
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                            </div>
+                            <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+
+            // Update total
+            cartTotalPrice.textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Mobile Menu
+        function toggleMenu() {
+            navLinks.classList.toggle('active');
+        }
+
+        // Initialize App
+        init();
+    </script>
+</body>
+</html>
